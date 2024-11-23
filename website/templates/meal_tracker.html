@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+    <h2>Meal Nutrition Tracker</h2>
+    
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Add Ingredient</h5>
+                    <div class="form-group">
+                        <label for="ingredient">Ingredient:</label>
+                        <input type="text" class="form-control" id="ingredient">
+                    </div>
+                    <div class="form-group mt-2">
+                        <label for="grams">Grams:</label>
+                        <input type="number" class="form-control" id="grams" value="100">
+                    </div>
+                    <button onclick="addIngredient()" class="btn btn-primary mt-3">
+                        Add to Meal
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Meal Totals</h5>
+                    <div id="meal-totals">
+                        <p>Calories: <span id="total-calories">0</span></p>
+                        <p>Protein: <span id="total-protein">0</span>g</p>
+                        <p>Fat: <span id="total-fat">0</span>g</p>
+                        <p>Carbs: <span id="total-carbs">0</span>g</p>
+                    </div>
+                    <button onclick="clearMeal()" class="btn btn-warning">
+                        Clear Meal
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="mt-4">
+        <h5>Meal Ingredients</h5>
+        <div id="ingredient-list" class="list-group">
+            <!-- Ingredients will be added here dynamically -->
+        </div>
+    </div>
+</div>
+
+<script>
+let mealTotals = {
+    calories: 0,
+    protein: 0,
+    total_fat: 0,
+    carbohydrates: 0
+};
+
+async function addIngredient() {
+    const ingredient = document.getElementById('ingredient').value;
+    const grams = document.getElementById('grams').value;
+    
+    if (!ingredient || !grams) {
+        alert('Please enter both ingredient and grams');
+        return;
+    }
+    
+    try {
+        const response = await fetch('/api/track-ingredient', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ ingredient, grams }),
+        });
+        
+        const data = await response.json();
+        if (response.ok) {
+            updateMealTotals(data);
+            addIngredientToList(data);
+            document.getElementById('ingredient').value = '';
+        } else {
+            alert(data.error || 'Error adding ingredient');
+        }
+    } catch (error) {
+        alert('Error adding ingredient');
+    }
+}
+
+function updateMealTotals(data) {
+    mealTotals.calories += data.calories;
+    mealTotals.protein += data.protein;
+    mealTotals.total_fat += data.total_fat;
+    mealTotals.carbohydrates += data.carbohydrates;
+    
+    document.getElementById('total-calories').textContent = mealTotals.calories.toFixed(1);
+    document.getElementById('total-protein').textContent = mealTotals.protein.toFixed(1);
+    document.getElementById('total-fat').textContent = mealTotals.total_fat.toFixed(1);
+    document.getElementById('total-carbs').textContent = mealTotals.carbohydrates.toFixed(1);
+}
+
+function addIngredientToList(data) {
+    const list = document.getElementById('ingredient-list');
+    const item = document.createElement('div');
+    item.className = 'list-group-item';
+    item.innerHTML = `
+        ${data.grams}g ${data.ingredient} - 
+        Calories: ${data.calories.toFixed(1)}, 
+        Protein: ${data.protein.toFixed(1)}g, 
+        Fat: ${data.total_fat.toFixed(1)}g, 
+        Carbs: ${data.carbohydrates.toFixed(1)}g
+    `;
+    list.appendChild(item);
+}
+
+function clearMeal() {
+    mealTotals = {
+        calories: 0,
+        protein: 0,
+        total_fat: 0,
+        carbohydrates: 0
+    };
+    
+    document.getElementById('total-calories').textContent = '0';
+    document.getElementById('total-protein').textContent = '0';
+    document.getElementById('total-fat').textContent = '0';
+    document.getElementById('total-carbs').textContent = '0';
+    document.getElementById('ingredient-list').innerHTML = '';
+}
+</script>
+{% endblock %}

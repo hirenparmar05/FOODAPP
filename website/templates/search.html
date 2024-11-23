@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Search Recipes</h1>
+
+<form method="POST">
+    <div class="search-container">
+        <input type="text" name="title" placeholder="Enter recipe name..." required>
+        <button type="submit">Search</button>
+    </div>
+</form>
+
+{% if message %}
+    <p class="message">{{ message }}</p>
+{% endif %}
+
+{% if results %}
+    <ul>
+        {% for recipe in results %}
+            <li>
+                <a href="{{ url_for('views.recipe_details', recipe_id=recipe['index']) }}">
+                    {{ recipe['Title'] }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}
+{% endblock %}

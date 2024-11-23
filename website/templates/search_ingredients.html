@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+    <h2>Search by Ingredients</h2>
+    <form method="POST">
+        <div class="form-group">
+            <label for="ingredients">Enter ingredients (comma-separated):</label>
+            <input type="text" class="form-control" id="ingredients" name="ingredients" 
+                   placeholder="e.g., chicken, rice, tomatoes">
+        </div>
+        <button type="submit" class="btn btn-primary mt-2">Search</button>
+    </form>
+
+    {% if message %}
+    <div class="alert alert-info mt-3">{{ message }}</div>
+    {% endif %}
+
+    {% if results %}
+    <div class="results mt-4">
+        {% for recipe in results %}
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title">{{ recipe.Title }}</h5>
+                <button class="btn btn-sm btn-info" 
+                        onclick="toggleDetails('ingredients-{{ loop.index }}')">
+                    Show Ingredients
+                </button>
+                <button class="btn btn-sm btn-info" 
+                        onclick="toggleDetails('instructions-{{ loop.index }}')">
+                    Show Instructions
+                </button>
+                <div id="ingredients-{{ loop.index }}" class="mt-2" style="display: none;">
+                    <h6>Ingredients:</h6>
+                    <p>{{ recipe.Ingredients }}</p>
+                </div>
+                <div id="instructions-{{ loop.index }}" class="mt-2" style="display: none;">
+                    <h6>Instructions:</h6>
+                    <p>{{ recipe.Instructions }}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+</div>
+
+<script>
+function toggleDetails(elementId) {
+    const element = document.getElementById(elementId);
+    if (element.style.display === "none") {
+        element.style.display = "block";
+    } else {
+        element.style.display = "none";
+    }
+}
+</script>
+{% endblock %}

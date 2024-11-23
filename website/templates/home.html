@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container-fluid p-0">
+    <!-- Hero section with cats ramen image -->
+    <div class="hero-section position-relative">
+        <img src="{{ url_for('static', filename='images/catsRamen.jpg') }}" 
+             class="w-100" 
+             alt="Cats Ramen"
+             style="max-height: 90vh; object-fit: cover;">
+        
+        <!-- Overlay text -->
+        <div class="position-absolute top-50 start-50 translate-middle text-center text-white">
+            <h1 class="display-4">Welcome to CookingCat</h1>
+            <p class="lead">Your personal recipe assistant</p>
+        </div>
+    </div>
+</div>
+
+<style>
+    .hero-section {
+        position: relative;
+        overflow: hidden;
+        height: calc(100vh - 56px); /* Subtracting navbar height */
+    }
+
+    .hero-section img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .hero-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.4); /* Slightly darker overlay for better text visibility */
+        z-index: 1;
+    }
+
+    .hero-section > div {
+        z-index: 2;
+    }
+
+    /* Make text more visible on the image */
+    .hero-section h1 {
+        font-weight: 600;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    .hero-section p {
+        font-size: 1.5rem;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    }
+</style>
+{% endblock %}
