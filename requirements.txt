@@ -1,6 +1,24 @@
-Flask==2.0.1
-Flask-Login==0.5.0
-Flask-SQLAlchemy==2.5.1
-Jinja2==3.0.1
-MarkupSafe==2.0.1
-SQLAlchemy==1.4.23
+blinker==1.9.0
+branca @ file:///Users/cbousseau/work/recipes/ci_py311/branca_1677957259604/work
+Brotli @ file:///private/var/folders/k1/30mswbxs7r1g6zwn8y4fyt500000gp/T/abs_27zk0eqdh0/croot/brotli-split_1714483157007/work
+certifi @ file:///private/var/folders/k1/30mswbxs7r1g6zwn8y4fyt500000gp/T/abs_0ecs_ou28u/croot/certifi_1725551740278/work/certifi
+charset-normalizer @ file:///croot/charset-normalizer_1721748349566/work
+click==8.1.7
+Flask==3.1.0
+Flask-Cors==5.0.0
+folium @ file:///Users/cbousseau/work/recipes/ci_py311/folium_1677971732399/work
+idna @ file:///private/var/folders/k1/30mswbxs7r1g6zwn8y4fyt500000gp/T/abs_a12xpo84t2/croot/idna_1714398852854/work
+itsdangerous==2.2.0
+Jinja2 @ file:///private/var/folders/k1/30mswbxs7r1g6zwn8y4fyt500000gp/T/abs_44yzu12j7f/croot/jinja2_1716993410427/work
+MarkupSafe @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_a84ni4pci8/croot/markupsafe_1704206002077/work
+numpy==2.1.1
+pandas==2.2.2
+pygame==2.6.0
+PySocks @ file:///Users/cbousseau/work/recipes/ci_py311/pysocks_1677906386870/work
+python-dateutil==2.9.0.post0
+pytz==2024.2
+requests @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_70sm12ba9w/croot/requests_1721414707360/work
+six==1.16.0
+tzdata==2024.1
+urllib3 @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_cao7_u9937/croot/urllib3_1718912649114/work
+Werkzeug==3.1.3
