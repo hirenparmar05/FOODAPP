@@ -3,6 +3,7 @@ import pandas as pd
 import random
 import requests
 import re
+import os
 
 views = Blueprint('views', __name__)
 
@@ -133,22 +134,47 @@ def search():
     
     return render_template('search.html', results=[], message="Enter a recipe name to search")
 
+def get_image_path(recipe):
+    try:
+        # Get image name from the recipe dictionary and add .jpg extension
+        image_name = f"{recipe['Image_Name']}.jpg"
+        base_path = os.path.join('website', 'static', 'food_images')
+        
+        # Debug prints
+        print(f"Looking for image: {image_name}")
+        
+        if os.path.exists(os.path.join(base_path, image_name)):
+            print(f"Found image: {image_name}")
+            return f"food_images/{image_name}"
+        else:
+            print(f"Image not found: {image_name}")
+    except Exception as e:
+        print(f"Error finding image: {e}")
+    
+    return "food_images/default.jpg"
+
 @views.route('/recipe/<int:recipe_id>')
 def recipe_details(recipe_id):
     try:
-        print(f"Recipe ID: {recipe_id}")  # Debug statement
         recipe = df.iloc[recipe_id].to_dict()
-        print(f"Recipe Data: {recipe}")  # Debug statement
+        
+        # Get image path using recipe's Image_Name
+        image_path = get_image_path(recipe)
+        print(f"Image path returned: {image_path}")
+        
+        recipe['image_path'] = image_path
         return render_template('recipe_details.html', recipe=recipe)
     except IndexError as e:
-        print(f"Error: {e}")  # Debug in case of invalid ID
+        print(f"Error: {e}")
         return render_template('404.html'), 404
 
 
-@views.route('/random')
+@views.route('/random_recipe')
 def random_recipe():
-    recipe = df.sample().iloc[0]
-    return render_template('recipe.html', recipe=recipe)
+    recipe = df.sample().iloc[0].to_dict()
+    # Add image path to the recipe dictionary
+    recipe['image_path'] = get_image_path(recipe)
+    return render_template('recipe_details.html', recipe=recipe)  # Use recipe_details.html instead of recipe.html
 
 @views.route('/macros', methods=['POST'])
 def macros():

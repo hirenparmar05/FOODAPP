@@ -29,6 +29,10 @@
                         onclick="toggleDetails('instructions-{{ loop.index }}')">
                     Show Instructions
                 </button>
+                <button class="btn btn-sm btn-info" 
+                        onclick="toggleImage('image-{{ loop.index }}')">
+                    Show Image
+                </button>
                 <div id="ingredients-{{ loop.index }}" class="mt-2" style="display: none;">
                     <h6>Ingredients:</h6>
                     <p>{{ recipe.Ingredients }}</p>
@@ -36,6 +40,11 @@
                 <div id="instructions-{{ loop.index }}" class="mt-2" style="display: none;">
                     <h6>Instructions:</h6>
                     <p>{{ recipe.Instructions }}</p>
+                </div>
+                <div id="image-{{ loop.index }}" class="mt-2" style="display: none;">
+                    <h6>Image:</h6>
+                    <img src="{{ url_for('static', filename=recipe.image_path) }}" 
+                         alt="{{ recipe.Title }}" class="img-fluid">
                 </div>
             </div>
         </div>
@@ -53,5 +62,15 @@ function toggleDetails(elementId) {
         element.style.display = "none";
     }
 }
+
+function toggleImage(elementId) {
+    const element = document.getElementById(elementId);
+    if (element.style.display === "none") {
+        element.style.display = "block";
+    } else {
+        element.style.display = "none";
+    }
+}
 </script>
 {% endblock %}
+
