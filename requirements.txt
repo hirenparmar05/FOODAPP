@@ -1,6 +1,5 @@
 # Flask and related packages
 Flask==2.3.2
-Flask-Cors==5.2.0          # For handling Cross-Origin Resource Sharing
 Flask-Login==0.6.0         # For user session management
 Flask-SQLAlchemy==2.5.1    # For SQLAlchemy integration
 Flask-Migrate==3.1.0       # For database migrations
@@ -13,7 +12,7 @@ numpy==1.24.3               # For numerical operations
 
 # Web scraping and requests
 requests==2.31.0            # For making HTTP requests
-beautifulsoup4==4.12.2      # For parsing HTML and web scraping
+
 
 
 # Image processing
