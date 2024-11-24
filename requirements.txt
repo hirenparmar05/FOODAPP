@@ -1,38 +1,15 @@
-# Flask and related packages
-Flask==2.3.2
-Flask-Login==0.6.0         # For user session management
-Flask-SQLAlchemy==2.5.1    # For SQLAlchemy integration
-Flask-Migrate==3.1.0       # For database migrations
-Flask-WTF==1.0.0           # For form handling and validation
-Flask-RESTful==0.3.9       # For building REST APIs
-
-# Data handling and manipulation
-pandas==2.2.2               # For data manipulation and analysis
-numpy==1.24.3               # For numerical operations
-
-# Web scraping and requests
-requests==2.31.0            # For making HTTP requests
-
-
-
-# Image processing
-Pillow==10.0.0              # For image processing tasks
-
-
-# Utilities
-blinker==1.9.0              # For signal handling
-itsdangerous==2.2.0         # For securely signing data
-Jinja2==3.1.2               # Templating engine used by Flask
-MarkupSafe==2.1.1           # For safe string handling
-
-
-# Networking
-PySocks==1.7.1              # For SOCKS proxy support
-urllib3==1.26.15            # For handling HTTP requests
-
-# Development and testing
-pytest==7.3.1               # For testing your application
-pytest-flask==1.2.0         # For testing Flask applications
-
-# Deployment
-gunicorn==20.1.0            # WSGI HTTP Server for UNIX
+Flask==2.0.1
+Flask-Login==0.5.0
+Flask-SQLAlchemy==2.5.1
+Jinja2==3.0.1
+MarkupSafe==2.0.1
+SQLAlchemy==1.4.23
+Werkzeug==2.0.1
+itsdangerous==2.0.1
+pandas==2.0.3
+numpy==1.24.3
+python-dotenv==0.19.0
+requests==2.26.0
+urllib3==1.26.7
+click==8.0.1
+gunicorn==21.2.0
